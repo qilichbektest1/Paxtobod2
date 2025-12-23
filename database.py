@@ -15,7 +15,7 @@ async def init_db():
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """)
-        
+
         # Orders table
         await db.execute("""
             CREATE TABLE IF NOT EXISTS orders (
@@ -32,7 +32,7 @@ async def init_db():
                 FOREIGN KEY (user_id) REFERENCES users(user_id)
             )
         """)
-        
+
         await db.execute("""
             CREATE TABLE IF NOT EXISTS drivers (
                 driver_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -47,7 +47,7 @@ async def init_db():
                 FOREIGN KEY (user_id) REFERENCES users(user_id)
             )
         """)
-        
+
         await db.commit()
 
 
@@ -83,7 +83,8 @@ async def update_order_contact(order_id: int, phone: str, location_lat: float, l
         await db.commit()
 
 
-async def create_driver_application(user_id: int, full_name: str, phone: str, car_model: str, car_number: str, photo_file_id: str):
+async def create_driver_application(user_id: int, full_name: str, phone: str, car_model: str, car_number: str,
+                                    photo_file_id: str):
     """Create new driver application"""
     async with aiosqlite.connect(DATABASE_PATH) as db:
         cursor = await db.execute("""

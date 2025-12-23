@@ -373,26 +373,6 @@ async def receive_location(message: Message, state: FSMContext, bot: Bot):
         except Exception as e:
             print(f"Error sending to TAXI_GROUP: {e}")
 
-    # --- Adminga yuborish ---
-    if ADMIN_USER_ID != 0:
-        try:
-            await bot.send_location(
-                chat_id=ADMIN_USER_ID,
-                latitude=location_lat,
-                longitude=location_lon
-            )
-            await bot.send_message(
-                chat_id=ADMIN_USER_ID,
-                text=group_message,
-                parse_mode="HTML"
-            )
-        except Exception as e:
-            print(f"Error sending to ADMIN: {e}")
-
-    await state.clear()
-
-    await state.clear()
-
 
 @router.message(F.text == "⬅️ Bekor qilish")
 async def cancel_order(message: Message, state: FSMContext):
